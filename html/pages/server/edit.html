@@ -1,0 +1,80 @@
+<section class="content-header">
+ <h1>Add Server</h1>
+</section>
+<section class="content">
+ <!-- /.row -->
+ <div class="row">
+  <div class="col-xs-12">
+   <div class="box box-primary">
+     <div class="box-body">
+      <div class="form-group">
+       <label>Server ip</label>
+       <input type="text" class="form-control" name="ip" placeholder="Server ip">
+      </div>
+      <div class="form-group">
+       <label>Server port</label>
+       <input type="text" class="form-control" name="port" placeholder="Server port">
+      </div>
+      <div class="form-group">
+       <label>Server protocol</label>
+       <select name="protocol" class="form-control">
+       </select>
+      </div>
+      <div class="form-group">
+       <label>Server weight</label>
+       <input type="text" class="form-control" name="weight" placeholder="Server weight">
+      </div>
+      <div class="form-group">
+       <label >Server description</label>
+       <input type="text" class="form-control" name="description" placeholder="Server description">
+      </div>
+     </div>
+     <!-- /.box-body -->
+     <div class="box-footer">
+      <button id="add-server-btn" class="btn btn-primary">Edit</button>
+      <button class="btn btn-default" onclick="load_page('/pages/server/list.html');">Cancel</button>
+     </div>
+   </div>
+   <!-- /.box -->
+  </div>
+ </div>
+</section>
+<script type="text/javascript">
+      $(".content-header h1").html(domain_name+" > "+service_name+" > Edit backend server")
+      $("#add-server-btn").click(function(){
+      if (!is_ip($("input[name='ip']").val())) {
+        alert("Invalid ip address.");
+        return;
+      }
+      if (!check_port($("input[name='port']").val())) {
+        alert("Invalid port.");
+        return;
+      }
+      if (!check_weight($("input[name='weight']").val())) {
+        alert("Invalid weight, must be a number great than 0.");
+        return;
+      }
+      var params = {server_id:server_id,ip:$("input[name='ip']").val(),port:$("input[name='port']").val(),protocol:$("select[name='protocol']").val(),description:$("input[name='description']").val(),weight:$("input[name='weight']").val()};
+        api_invoke("/api/v1/server/edit", params, function(data){
+            if(data.errno == 0){
+                load_page("/pages/server/list.html");
+            }else{
+                alert(data.msg);
+            }
+        });
+      });
+      $(function(){
+      api_invoke("/api/v1/server/get", {server_id:server_id}, function(data){
+            if(data.errno == 0){
+                $("input[name='ip']").val(data.info.ip);
+                $("input[name='port']").val(data.info.port);
+                $("input[name='weight']").val(data.info.weight);
+                $("input[name='description']").val(data.info.description);
+                var protocolOptions='<option value="'+data.info.protocol+'">'+data.info.protocol+'</option><option value="http://">http://</option><option value="https://">https://</option>';
+                $("select[name='protocol']").html(protocolOptions);
+            }else{
+                alert(data.msg);
+            }
+        });
+    });
+</script>

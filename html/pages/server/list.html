@@ -1,0 +1,95 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+ <h1></h1>
+</section>
+<!-- Main content -->
+<section class="content">
+ <!-- /.row -->
+ <div class="row">
+  <div class="col-xs-12">
+   <div class="box">
+    <div class="box-header">
+     <h3 class="box-title"></h3>
+
+     <div class="box-tools">
+      <div class="input-group input-group-sm" style="width: 150px;">
+       <div class="input-group-btn">
+        <button class="btn btn-block btn-primary" onclick="load_page('/pages/server/add.html')">Add server</button>
+       </div>
+        <div class="input-group-btn">
+          <button class="btn btn-default" onclick="load_page('/pages/service/list.html');">Back</button>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div id="server-container" class="box-body table-responsive no-padding">
+    </div>
+    <!-- /.box-body -->
+   </div>
+   <!-- /.box -->
+  </div>
+ </div>
+</section>
+<script id="server-tpl" type="text/html">
+<table class="table table-hover">
+  <%for(var i = 0; i < list.length; i++) {%>
+  <% if(i==0){%>
+  <tr>
+   <th>Ip</th>
+   <th>Port</th>
+   <th>Protocol</th>
+   <th>Weight</th>
+   <th>Status</th>
+   <th>Description</th>
+   <th>Manage</th>
+  </tr>
+  <%}%>
+  <tr>
+   <td><%:=list[i].ip%></td>
+   <td><%:=list[i].port%></td>
+   <td><%:=list[i].protocol%></td>
+   <td><%:=list[i].weight%></td>
+   <td>
+   <% if(list[i].status == 1){ %>
+    <span class="badge bg-green">up</span>
+   <% }else{ %>
+    <span class="badge bg-red">down</span>
+   <% }%>
+   </td>
+   <td><%:=list[i].description%></td>
+   <td>
+    <a href="javascript:;" onclick="server_id=<%:=list[i].id%>;load_page('/pages/server/edit.html')" >Edit</a>&nbsp;&nbsp;
+    <a href="javascript:;" data-id="<%:=list[i].id%>" class="server-delete">Delete</a></td>
+  </tr>
+  <%}%>
+ </table>
+</script>
+<script type="text/javascript">
+    $(".content-header h1").html(domain_name+" > "+service_name+" > Backend servers");
+    $(".box-title").html("Backend servers");
+    $(function(){
+        api_invoke("/api/v1/server/list", {service_id:service_id}, function(data){
+            if(data.errno == 0){
+                var html = template($("#server-tpl").html(), {list: data.info});
+                $("#server-container").html(html);
+                $(".server-delete").click(function(){
+                    var id=$(this).attr("data-id");
+                    if(confirm("Please make sure to delete this server?")){
+                        delete_server(id);
+                    }
+                });
+            }else{
+                alert(data.msg);
+            }
+        });
+    });
+    function delete_server(id){
+        api_invoke("/api/v1/server/delete", {server_id:id}, function(data){
+            if(data.errno == 0){
+                load_page("/pages/server/list.html");
+            }else{
+                alert(data.msg);
+            }
+        });
+    }
+</script>

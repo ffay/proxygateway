@@ -1,0 +1,35 @@
+<section class="content-header">
+ <h1>Add domain</h1>
+</section>
+<section class="content">
+ <!-- /.row -->
+ <div class="row">
+  <div class="col-xs-12">
+   <div class="box box-primary">
+     <div class="box-body">
+      <div class="form-group">
+       <label for="city_name">Domain name</label>
+       <input type="text" class="form-control" name="name" placeholder="Domain name">
+      </div>
+     </div>
+     <!-- /.box-body -->
+     <div class="box-footer">
+      <button id="add-domain-btn" class="btn btn-primary">Add</button>
+     </div>
+   </div>
+   <!-- /.box -->
+  </div>
+ </div>
+</section>
+<script type="text/javascript">
+    $("#add-domain-btn").click(function(){
+        api_invoke("/api/v1/domain/add", {name:$("input[name='name']").val()}, function(data){
+            if(data.errno == 0){
+                load_page("/pages/domain/list.html");
+                update_menu();
+            }else{
+                alert(data.msg);
+            }
+        });
+    });
+</script>

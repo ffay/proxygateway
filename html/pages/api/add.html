@@ -1,0 +1,45 @@
+<section class="content-header">
+ <h1>Add api</h1>
+</section>
+<section class="content">
+ <!-- /.row -->
+ <div class="row">
+  <div class="col-xs-12">
+   <div class="box box-primary">
+     <div class="box-body">
+      <div class="form-group">
+       <label>Request uri</label>
+       <input type="text" class="form-control" name="request_uri" placeholder="Request uri">
+      </div>
+      <div class="form-group">
+       <label>Original uri</label>
+       <input type="text" class="form-control" name="original_uri" placeholder="The backend service's uri">
+      </div>
+      <div class="form-group">
+       <label >uri description</label>
+       <input type="text" class="form-control" name="description" placeholder="uri description">
+      </div>
+     </div>
+     <!-- /.box-body -->
+     <div class="box-footer">
+      <button id="add-api-btn" class="btn btn-primary">Add</button>
+      <button class="btn btn-default" onclick="load_page('/pages/api/list.html');">Cancel</button>
+     </div>
+   </div>
+   <!-- /.box -->
+  </div>
+ </div>
+</section>
+<script type="text/javascript">
+      $(".content-header h1").html(domain_name+" > "+service_name+" > Add service uri")
+      $("#add-api-btn").click(function(){
+      var params = {service_id:service_id,request_uri:$("input[name='request_uri']").val(),original_uri:$("input[name='original_uri']").val(),description:$("input[name='description']").val()};
+        api_invoke("/api/v1/api/add", params, function(data){
+            if(data.errno == 0){
+                load_page("/pages/api/list.html");
+            }else{
+                alert(data.msg);
+            }
+        });
+    });
+</script>

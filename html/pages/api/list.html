@@ -1,0 +1,83 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+ <h1></h1>
+</section>
+<!-- Main content -->
+<section class="content">
+ <!-- /.row -->
+ <div class="row">
+  <div class="col-xs-12">
+   <div class="box">
+    <div class="box-header">
+     <h3 class="box-title"></h3>
+
+     <div class="box-tools">
+      <div class="input-group input-group-sm" style="width: 150px;">
+       <div class="input-group-btn">
+        <button class="btn btn-block btn-primary" onclick="load_page('/pages/api/add.html')">Add uri</button>
+       </div>
+        <div class="input-group-btn">
+          <button class="btn btn-default" onclick="load_page('/pages/service/list.html');">Back</button>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div id="api-container" class="box-body table-responsive no-padding">
+    </div>
+    <!-- /.box-body -->
+   </div>
+   <!-- /.box -->
+  </div>
+ </div>
+</section>
+<script id="api-tpl" type="text/html">
+<table class="table table-hover">
+  <%for(var i = 0; i < list.length; i++) {%>
+  <% if(i==0){%>
+  <tr>
+   <th>Request uri</th>
+   <th>Original uri</th>
+   <th>Description</th>
+   <th>Manage</th>
+  </tr>
+  <%}%>
+  <tr>
+   <td><%:=list[i].request_uri%></td>
+   <td><%:=list[i].original_uri%></td>
+   <td><%:=list[i].description%></td>
+   <td>
+    <a href="javascript:;" onclick="api_id=<%:=list[i].id%>;load_page('/pages/api/edit.html')" >Edit</a>&nbsp;&nbsp;
+    <a href="javascript:;" data-id="<%:=list[i].id%>" class="api-delete">Delete</a></td>
+  </tr>
+  <%}%>
+ </table>
+</script>
+<script type="text/javascript">
+    $(".content-header h1").html(domain_name+" > "+service_name+" > uris");
+    $(".box-title").html("uris");
+    $(function(){
+        api_invoke("/api/v1/api/list", {service_id:service_id}, function(data){
+            if(data.errno == 0){
+                var html = template($("#api-tpl").html(), {list: data.info});
+                $("#api-container").html(html);
+                $(".api-delete").click(function(){
+                    var id=$(this).attr("data-id");
+                    if(confirm("Please make sure to delete this uri?")){
+                        delete_api(id);
+                    }
+                });
+            }else{
+                alert(data.msg);
+            }
+        });
+    });
+    function delete_api(id){
+        api_invoke("/api/v1/api/delete", {api_id:id}, function(data){
+            if(data.errno == 0){
+                load_page("/pages/api/list.html");
+            }else{
+                alert(data.msg);
+            }
+        });
+    }
+</script>

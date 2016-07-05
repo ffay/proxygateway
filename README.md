@@ -145,7 +145,7 @@ http://a.fengfei.org/
 然后可在你添加的域名下做代理配置
 
 其中配置的一个google代理，欢迎测试
-http://google.fengfei.org/
+https://fengfei.org/
 
 **后续**
 

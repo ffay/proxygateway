@@ -1,7 +1,7 @@
 
 **PGW（Proxy Gateway）**
 
-Proxy Gateway基于openresty（nginx lua module）开发，可以作为接口网关（api gateway）使用，整合业务模块接口，通过web配置界面，能够轻松进行代理配置管理，支持负载均衡，服务器状态检测，后续简称PGW。包括以下特性
+Proxy Gateway基于openresty（nginx lua module）开发，可以作为接口网关（api gateway）使用，整合业务模块接口，微服务治理聚合，通过web配置界面，能够轻松进行代理配置管理，支持负载均衡，服务器状态检测，后续简称PGW。包括以下特性
 
 - 支持多域名，可以配置多个出口域名，互不干扰
 - 代理分组（服务模块），可以按照业务模块进行分组

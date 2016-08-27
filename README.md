@@ -1,7 +1,7 @@
 
 **PGW（Proxy Gateway）**
 
-Proxy Gateway基于openresty（nginx lua module）开发，通过web配置界面，能够轻松进行代理配置管理，支持负载均衡，服务器状态检测，后续简称PGW。包括以下特性
+Proxy Gateway基于openresty（nginx lua module）开发，可以作为接口网关（api gateway）使用，整合业务模块接口，通过web配置界面，能够轻松进行代理配置管理，支持负载均衡，服务器状态检测，后续简称PGW。包括以下特性
 
 - 支持多域名，可以配置多个出口域名，互不干扰
 - 代理分组（服务模块），可以按照业务模块进行分组
@@ -19,7 +19,7 @@ Proxy Gateway基于openresty（nginx lua module）开发，通过web配置界面
 
 ```shell
 cd /usr/local/openresty/nginx
-git clone https://git.oschina.net/fengfei/proxygateway.git
+git clone https://github.com/ffay/proxygateway.git
 ```
 
 然后把/usr/local/openresty/nginx/conf/nginx.conf 用源码中的nginx.conf替换即可
@@ -132,16 +132,16 @@ server {
 |/ |/  |将所有对PGW某个域下的请求转发到后端服务器 |
 |/u |/user  |将所有对PGW某个域下/u开头的请求重写成/user后转发到后端服务器，例如，请求 /u/1001 转发到后端服务器为 /user/1001 |
 |/topic/([0-9]+)/([0-9]+)     |/topic?uid=$1&tid=$2  |支持正则匹配，请求 /topic/1001/2002 转发到后端服务器为  /topic?uid=1001&tid=2002  |
-|/t%?tid=(.*)    |/topic?tid=$1  |支持正则匹配,Request uri中如果有 ? 出现，需要在前面加上 % |
+|/t%?tid=(.*)    |/topic?tid=$1  |支持正则匹配,Request uri中如果有 ? 出现，需要在前面加上 %，用于转义问号 |
 
 所有接口映射配置必须以 / 开头，同一个域下面 Request uri 不能重复，Request uri字符串越长匹配优先级越高
 
 **演示地址**
 
-http://a.fengfei.org/
+https://a.fengfei.org/
 用户名/密码 admin/admin
 
-添加域名后，请将域名cname解析到 a.fengfei.org
+添加域名后，请将域名cname解析到 fengfei.org
 然后可在你添加的域名下做代理配置
 
 其中配置的一个google代理，欢迎测试
@@ -153,3 +153,5 @@ https://fengfei.org/
 - 访问频率控制
 - IP黑白名单
 - 数据统计
+- 欢迎提出更多功能
+

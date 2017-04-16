@@ -25,7 +25,7 @@ git clone https://github.com/ffay/proxygateway.git
 然后把/usr/local/openresty/nginx/conf/nginx.conf 用源码中的nginx.conf替换即可
     
 
-```
+```nginx
 
 worker_processes  2;
 
@@ -119,7 +119,7 @@ server {
 - 在PGW源码中  src/config.lua 进行管理员以及MySQL相关配置
 - 在数据库中运行pgw.sql脚本
 - 启动openresty（openresty安装目录/nginx/sbin/nginx）
-- 在浏览器中打开 http://PGW的IP:8081 ，如果是集群部署，打开任意一台的PGW管理界面进行配置即可，登录即可进行域名以及分组代理等配置管理，其中添加的域名需要解析到相应PGW的ip，如果前端还有负载均衡器（例如aws或aliyun的load balancing），域名直接解析到负载均衡器ip即可
+- 在浏览器中打开 http://ip:8081 ，如果是集群部署，打开任意一台的PGW管理界面进行配置即可，登录即可进行域名以及分组代理等配置管理，其中添加的域名需要解析到相应PGW的ip，如果前端还有负载均衡器（例如aws或aliyun的load balancing），域名直接解析到负载均衡器ip即可
 
 **管理配置**
 - 域（域名）管理，可以任意添加多个域名，默认域 localhost 在该域下的配置，直接访问IP生效，PGW通过域名进行配置隔离，每个域名下的配置互不干扰，需要将域名解析到PGW的IP
@@ -135,17 +135,6 @@ server {
 |/t%?tid=(.*)    |/topic?tid=$1  |支持正则匹配,Request uri中如果有 ? 出现，需要在前面加上 %，用于转义问号 |
 
 所有接口映射配置必须以 / 开头，同一个域下面 Request uri 不能重复，Request uri字符串越长匹配优先级越高
-
-**演示地址**
-
-https://a.fengfei.org/
-用户名/密码 admin/admin
-
-添加域名后，请将域名cname解析到 fengfei.org
-然后可在你添加的域名下做代理配置
-
-其中配置的一个google代理，欢迎测试
-https://fengfei.org/
 
 **后续**
 

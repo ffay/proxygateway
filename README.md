@@ -27,7 +27,7 @@ git clone https://github.com/ffay/proxygateway.git
 
 ```nginx
 
-worker_processes  2;
+worker_processes  1;
 
 events {
     worker_connections  102400;

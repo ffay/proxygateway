@@ -23,64 +23,8 @@ git clone https://github.com/ffay/proxygateway.git
 ```
 
 然后把/usr/local/openresty/nginx/conf/nginx.conf 用源码中的nginx.conf替换即可
-    
 
-```nginx
-
-worker_processes  1;
-
-events {
-    worker_connections  102400;
-}
-
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-    sendfile        on;
-    keepalive_timeout  65;
-    lua_shared_dict cache 10m;
-
-    #换成你的实际路径，这里将源码中src目录加入到 lua_package_path
-    lua_package_path '/usr/local/openresty/nginx/proxygateway/src/?.lua;;';
-
-    #lua_code_cache off;
-
-    upstream servers {
-      server 127.0.0.1;
-      balancer_by_lua_block{
-        local balancer = require "balancer"
-        balancer.balancing()
-      }
-    }
-
-    init_worker_by_lua_block{
-        require "init"
-    }
-
-    server {
-        listen  80  default_server;
-        server_name localhost;
-
-        location / {
-            set $backend_host '127.0.0.1';
-            set $backend_port 80;
-            set $newhost '';
-            set $upstream 'http://servers';
-            access_by_lua_block{
-                local access = require "access"
-                access.dispatch()
-            }
-            proxy_set_header Host $newhost;
-            proxy_http_version 1.1;
-            proxy_pass $upstream;
-        }
-        error_log logs/error.log;
-    }
-
-    #将源码中的 manage.conf 路径
-    include /usr/local/openresty/nginx/proxygateway/manage.conf;
-}
-```
+https://github.com/ffay/proxygateway/blob/master/nginx.conf
 
 - 配置manage.conf
 

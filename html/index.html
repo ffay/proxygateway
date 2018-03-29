@@ -1,80 +1,79 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>PROXY-GATEWAY CENTER</title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta
- content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
- name="viewport">
-<!-- Bootstrap 3.3.5 -->
-<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
-<!-- Font Awesome -->
-<link rel="stylesheet"
- href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<!-- Ionicons
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/ionicons.min.css">
- -->
-<!-- <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css"> -->
-<!-- Theme style -->
-<link rel="stylesheet" href="/static/adminlte/css/AdminLTE.min.css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins
-folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet"
- href="/static/adminlte/css/skins/_all-skins.min.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PROXY-GATEWAY CENTER</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+            name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome
+    <link rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/ionicons.min.css">
+     -->
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/adminlte/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+    folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet"
+          href="/static/adminlte/css/skins/_all-skins.min.css">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
- <div class="wrapper">
+<div class="wrapper">
 
-  <header class="main-header">
-   <!-- Logo -->
-   <a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>PGW</b></span> <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>PROXY GATEWAY</b></span>
-   </a>
-   <!-- Header Navbar: style can be found in header.less -->
-   <nav class="navbar navbar-static-top" role="navigation">
-    <!-- Sidebar toggle button-->
-    <a href="#" class="sidebar-toggle" data-toggle="offcanvas"
-     role="button"> <span class="sr-only"></span> <span class="icon-bar"></span>
-     <span class="icon-bar"></span> <span class="icon-bar"></span>
-    </a>
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>PGW</b></span> <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>PROXY GATEWAY</b></span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas"
+               role="button"> <span class="sr-only"></span> <span class="icon-bar"></span>
+                <span class="icon-bar"></span> <span class="icon-bar"></span>
+            </a>
 
-    <div class="navbar-custom-menu">
-     <ul class="nav navbar-nav">
-      <li><a href="/api/v1/logout" class="btn btn-flat">Exit</a></li>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li><a href="/api/v1/logout" class="btn btn-flat">Exit</a></li>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+        <!-- /.content -->
     </div>
-   </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-   <!-- sidebar: style can be found in sidebar.less -->
-   <section class="sidebar">
-    <!-- sidebar menu: : style can be found in sidebar.less -->
-    <ul class="sidebar-menu">
-    </ul>
-   </section>
-   <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-
-    <!-- /.content -->                                                                                                                      
-  </div>
-<!-- /.content-wrapper -->
-<footer class="main-footer">
-  <b>Proxy Gateway Version</b> 0.1
-</footer>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <b>Proxy Gateway Version</b> 0.1
+    </footer>
 </div>
 <!-- ./wrapper -->
 
@@ -94,40 +93,46 @@ folder instead of downloading all of them to reduce the load. -->
 <script id="menu-tpl" type="text/html">
     <li class="header">MENU LIST</li>
     <li class="treeview active">
-        <a href="#"><i class="fa fa-folder-o"></i><span>Proxy configuration</span><i class="fa fa-angle-left pull-right"></i></a>
+        <a href="#"><i class="fa fa-folder-o"></i><span>Proxy configuration</span><i
+                class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
             <%for(var i = 0; i < list.length; i++) {%>
-                <li><a href="javascript:;" onclick="domain_id=<%:=list[i].id%>;domain_name='<%:=list[i].name%>';load_page('/pages/service/list.html');"><i class="fa fa-circle-o"></i><%:=list[i].name%></a></li>
+            <li><a href="javascript:;"
+                   onclick="domain_id=<%:=list[i].id%>;domain_name='<%:=list[i].name%>';load_page('/pages/service/list.html');"><i
+                    class="fa fa-circle-o"></i><%:=list[i].name%></a></li>
             <%}%>
         </ul>
     </li>
     <li class="treeview">
-        <a href="#"><i class="fa fa-laptop"></i><span>Domain manage</span><i class="fa fa-angle-left pull-right"></i></a>
+        <a href="#"><i class="fa fa-laptop"></i><span>Domain manage</span><i
+                class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-        <li><a href="javascript:;" onclick="load_page('/pages/domain/list.html');"><i class="fa fa-circle-o text-aqua"></i><span>Domain list</span></a></li>
-        <li><a href="javascript:;" onclick="load_page('/pages/domain/add.html');"><i class="fa fa-circle-o text-aqua"></i><span>Add domain</span></a></li>
+            <li><a href="javascript:;" onclick="load_page('/pages/domain/list.html');"><i
+                    class="fa fa-circle-o text-aqua"></i><span>Domain list</span></a></li>
+            <li><a href="javascript:;" onclick="load_page('/pages/domain/add.html');"><i
+                    class="fa fa-circle-o text-aqua"></i><span>Add domain</span></a></li>
         </ul>
     </li>
 </script>
 <script type="text/javascript">
-    $(function(){
-        update_menu(function(domains){
-          if (domains.length>0) {
-            domain_id = domains[0].id;
-            domain_name = domains[0].name;
-            load_page('/pages/service/list.html');
-          }
+    $(function () {
+        update_menu(function (domains) {
+            if (domains.length > 0) {
+                domain_id = domains[0].id;
+                domain_name = domains[0].name;
+                load_page('/pages/service/list.html');
+            }
         });
     });
-    function update_menu(callback){
-        api_invoke("/api/v1/domain/all", {}, function(data){
-            if(data.errno == 0){
+    function update_menu(callback) {
+        api_invoke("/api/v1/domain/all", {}, function (data) {
+            if (data.errno == 0) {
                 var html = template($("#menu-tpl").html(), {list: data.info});
                 $(".sidebar-menu").html(html);
                 if (callback) {
-                  callback(data.info);
+                    callback(data.info);
                 }
-            }else{
+            } else {
                 alert(data.msg);
             }
         });

@@ -10,6 +10,7 @@ end
 
 function api_model.add(service_id, request_uri, original_uri, description)
     local db = mysql.getDb()
+    description = ndk.set_var.set_quote_sql_str(description)
 	local res, err, errno, sqlstate = db:query("INSERT INTO agw_api (service_id,request_uri,original_uri,description)values(\'"..service_id.."\',\'"..request_uri.."\',\'"..original_uri.."\',\'"..description.."\')", 10)
     db:set_keepalive(10000, 100)
     return res, err
@@ -31,6 +32,7 @@ end
 
 function api_model.update(id, request_uri, original_uri, description)
     local db = mysql.getDb()
+    description = ndk.set_var.set_quote_sql_str(description)
 	local res, err, errno, sqlstate = db:query("UPDATE agw_api SET request_uri=\'"..request_uri.."\',original_uri=\'"..original_uri.."\',description=\'"..description.."\' WHERE id="..id, 10)
     db:set_keepalive(10000, 100)
     return res, err

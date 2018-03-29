@@ -2,8 +2,9 @@ local mysql = require "model.mysql"
 local server_model = {}
 
 function server_model.add(service_id, ip, port, weight, description, protocol)
+    description = ndk.set_var.set_quote_sql_str(description)
     local db = mysql.getDb()
-	local res, err, errno, sqlstate = db:query("INSERT INTO agw_server(service_id,ip,port,weight,description,protocol)values(\'"..service_id.."\',\'"..ip.."\',\'"..port.."\',\'"..weight.."\',\'"..description.."\',\'"..protocol.."\')", 10)
+	local res, err, errno, sqlstate = db:query("INSERT INTO agw_server(service_id,ip,port,weight,description,protocol)values(\'"..service_id.."\',\'"..ip.."\',\'"..port.."\',\'"..weight.."\',"..description..",\'"..protocol.."\')", 10)
     db:set_keepalive(10000, 100)
     return res, err
 end
@@ -23,8 +24,9 @@ function server_model.deleteByServiceId(sid)
 end
 
 function server_model.update(server_id, ip, port, weight, description, protocol)
+    description = ndk.set_var.set_quote_sql_str(description)
     local db = mysql.getDb()
-	local res, err, errno, sqlstate = db:query("UPDATE agw_server SET ip=\'"..ip.."\',port="..port..",protocol=\'"..protocol.."\',weight=\'"..weight.."\',description=\'"..description.."\' WHERE id="..server_id, 10)
+	local res, err, errno, sqlstate = db:query("UPDATE agw_server SET ip=\'"..ip.."\',port="..port..",protocol=\'"..protocol.."\',weight=\'"..weight.."\',description="..description.." WHERE id="..server_id, 10)
     db:set_keepalive(10000, 100)
     return res, err
 end

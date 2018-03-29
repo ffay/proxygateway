@@ -6,14 +6,13 @@ function api_invoke(uri, params, callback) {
         cache: false,
         dataType: 'json',
         success: function (data) {
-            callback(data);
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log(XMLHttpRequest);
-            if (40100 == XMLHttpRequest.responseJSON.errno) {
+            if (40100 == data.errno) {
                 location.href = "/login.html";
                 return;
             }
+            callback(data);
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
             if ("undefined" == typeof(XMLHttpRequest.responseJSON)) {
                 alert("System error, please try again later.");
                 return;

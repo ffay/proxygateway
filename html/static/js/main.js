@@ -10,7 +10,7 @@ function api_invoke(uri, params, callback) {
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest);
-            if (XMLHttpRequest.status == "302") {
+            if (40100 == XMLHttpRequest.responseJSON.errno) {
                 location.href = "/login.html";
                 return;
             }

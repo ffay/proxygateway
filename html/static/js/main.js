@@ -9,7 +9,8 @@ function api_invoke(uri, params, callback) {
             callback(data);
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            if (XMLHttpRequest.status == 302) {
+            console.log(XMLHttpRequest);
+            if (XMLHttpRequest.status == "302") {
                 location.href = "/login.html";
                 return;
             }

@@ -9,12 +9,16 @@ function _M.checkLogin()
     end
     local uri = ngx.var.uri
     if uri ~= "/api/v1/login" and uri ~= "/login.html" then
-        local cache = ngx.shared.cache
-        local token = cache:get("login-token")
+        local session = ngx.shared.session
         local ck = require "resty.cookie"
-        local cookie, err = ck:new()
+        local cookie, _ = ck:new()
+        local token = cookie:get("token")
+        local user;
+        if token ~= nil then
+            user = session:get(token)
+        end
         local isApi = string.find(uri, "/api/v1/");
-        if isApi and (token == nil or token ~= cookie:get("token")) then
+        if isApi and user == nil then
             local response = {}
             response["status"] = 401
             response["errno"] = 40100
@@ -24,7 +28,7 @@ function _M.checkLogin()
             ngx.exit(401)
             return;
         end
-        if token == nil or token ~= cookie:get("token") then
+        if user == nil then
             return ngx.redirect("/login.html")
         end
     end

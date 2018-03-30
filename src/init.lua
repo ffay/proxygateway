@@ -20,7 +20,7 @@ api_sync_timer = function(premature)
         else
             log(ERR, "sync api info failed:", result)
         end
-        local ok, err = new_timer(api_sync_interval, api_sync_timer)
+        new_timer(api_sync_interval, api_sync_timer)
     end
 end
 
@@ -33,7 +33,7 @@ server_state_check_timer = function(premature)
         else
             log(ERR, "error occured when check server state:", result)
         end
-        local ok, err = new_timer(server_state_check_interval, server_state_check_timer)
+        new_timer(server_state_check_interval, server_state_check_timer)
     end
 end
 

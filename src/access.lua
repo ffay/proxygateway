@@ -38,7 +38,7 @@ function select_server(api_info)
     local request_index_cache_key = ngx.var.host .. "_request_index_" .. api_info["request_uri"]
     local request_index, _ = cache:incr(request_index_cache_key, 1)
     if request_index == nil then
-        request_index = cache:incr(request_index_cache_key, 1, 0, 60) -- 设置一段时间过期
+        request_index = cache:incr(request_index_cache_key, 1, 0)
     end
 
     return servers[request_index % server_count + 1]; --Lua 的 table 索引默认从 1 开始

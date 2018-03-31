@@ -17,8 +17,8 @@ function check_state(ip, port)
     local ok, err = sock:connect(ip, port)
     sock:close()
     if not ok then
-    log(ERR, "server connect err:", err)
-    return false
+        log(ERR, "server connect err:", err)
+        return false
     end
     return true
 end
@@ -28,29 +28,38 @@ function set_domain_api_info(domainId, domainName)
     local service_api_uri_map = {}
     local service_api_uri_array = {}
     for k, service in pairs(services) do
-        local servers=server_model.getServiceServersWithState(service["id"], 1)
-        local apis=api_model.getServiceApis(service["id"])
+        local servers = server_model.getServiceServersWithState(service["id"], 1)
+        local apis = api_model.getServiceApis(service["id"])
         for k, api in pairs(apis) do
             api["servers"] = servers
             api["host"] = service["host"]
             if service["host"] == "" then
                 api["host"] = domainName
             end
-            local original_uri, index=string.gsub(api["original_uri"], "%$([0-9]+)", "%%%1")
+            local original_uri, index = string.gsub(api["original_uri"], "%$([0-9]+)", "%%%1")
             api["original_uri"] = original_uri
             service_api_uri_map[api["request_uri"]] = api
             table.insert(service_api_uri_array, api["request_uri"])
         end
     end
-    table.sort(service_api_uri_array, function(a,b) return string.len(a) > string.len(b)   end)
-    local config = {api_uri_map = service_api_uri_map, api_uri_array = service_api_uri_array}
+    table.sort(service_api_uri_array, function(a, b) return string.len(a) > string.len(b) end)
+    local config = { api_uri_map = service_api_uri_map, api_uri_array = service_api_uri_array }
     cache:set(domainName, cjson.encode(config))
 end
 
 function agw_service.syncApiInfo()
+    local cachedDomains = cache:get_keys(0);
+    local new_domain_map = {}
     local domains, err = domain_model.getDomains()
     for k, domain in pairs(domains) do
         set_domain_api_info(domain["id"], domain["name"])
+        new_domain_map[domain["name"]] = domain
+    end
+    -- 清除缓存中已删除的域名配置
+    for k, domainName in pairs(cachedDomains) do
+        if new_domain_map[domainName] == nil then
+            cache:delete(domainName)
+        end
     end
 end
 
@@ -58,7 +67,7 @@ function agw_service.checkState()
     local servers = server_model.getAllServers()
     for k, server in pairs(servers) do
         if check_state(server["ip"], server["port"]) == false then
-            log(ERR, "server down:", server["ip"]..":"..server["port"])
+            log(ERR, "server down:", server["ip"] .. ":" .. server["port"])
             server_model.updateState(server["id"], 0)
         else
             server_model.updateState(server["id"], 1)
@@ -73,9 +82,9 @@ function agw_service.getServices(domainId)
         local down_servers_count = table.getn(server_model.getServiceServersWithState(service["id"], 0))
         local status = "no backend servers"
         if up_servers_count ~= 0 or down_servers_count ~= 0 then
-            status = "up "..up_servers_count..",down "..down_servers_count
+            status = "up " .. up_servers_count .. ",down " .. down_servers_count
         end
-        service["status"] = status  
+        service["status"] = status
     end
     return services, err
 end

@@ -25,7 +25,7 @@ function return_redis(red)
 end
 
 function _M.checkAccessLimit(uri, uriSeconds, uriTimes, ipUriSeconds, ipUriTimes)
-    if not uriSeconds or not ipUriSeconds then
+    if uriSeconds == 0 and ipUriSeconds == 0 then
         return
     end
 
@@ -35,27 +35,29 @@ function _M.checkAccessLimit(uri, uriSeconds, uriTimes, ipUriSeconds, ipUriTimes
     end
 
     -- 针对整个接口限流
-    if uriSeconds then
+    if uriSeconds > 0 then
         local value, _ = red:get(uri)
-        if value then
-            if value >= uriTimes then
-                return_redis()
+        if value == ngx.null then
+            red:setex(uri, uriSeconds, 1)
+        else
+            local count = tonumber(value)
+            if count >= uriTimes then
+                return_redis(red)
                 ngx.exit(403)
             end
             red:incr(uri)
-        else
-            red:setex(uri, uriSeconds, 1)
         end
     end
 
     -- 针对IP接口限流
-    if ipUriSeconds then
+    if ipUriSeconds > 0 then
         local headers = ngx.req.get_headers()
         local ip = headers["X-REAL-IP"] or headers["X_FORWARDED_FOR"] or ngx.var.remote_addr or "0.0.0.0"
         local value, _ = red:get(ip .. uri)
-        if value then
-            if value >= ipUriTimes then
-                return_redis()
+        if value ~= ngx.null then
+            local count = tonumber(value)
+            if count >= ipUriTimes then
+                return_redis(red)
                 ngx.exit(403)
             end
             red:incr(ip .. uri)
@@ -63,7 +65,7 @@ function _M.checkAccessLimit(uri, uriSeconds, uriTimes, ipUriSeconds, ipUriTimes
             red:setex(ip .. uri, ipUriSeconds, 1)
         end
     end
-    return_redis()
+    return_redis(red)
 end
 
 return _M

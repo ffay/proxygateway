@@ -77,7 +77,10 @@ function _M.dispatch()
         ngx.exit(404)
     end
 
-    -- TODO：限流,IP黑名单...
+    -- TODO：IP黑名单...
+    -- 限流
+    local al = require "access_limit"
+    al.checkAccessLimit(api_info["request_uri"], api_info["uri_limit_seconds"], api_info["uri_limit_times"], api_info["ip_uri_limit_seconds"], api_info["ip_uri_limit_times"])
 
     -- 负载均衡，选择服务器开始
     local server = select_server(api_info);

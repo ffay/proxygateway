@@ -8,31 +8,31 @@
    <div class="box box-primary">
      <div class="box-body">
       <div class="form-group">
-       <label>Request uri</label>
+       <label>原始请求URL</label>
        <input type="text" class="form-control" name="request_uri" placeholder="Request uri">
       </div>
       <div class="form-group">
-       <label>Original uri</label>
+       <label>后端服务URL</label>
        <input type="text" class="form-control" name="original_uri" placeholder="The backend service's uri">
       </div>
       <div class="form-group">
        <label>针对URI限流统计周期（秒）</label>
-       <input type="number" class="form-control" name="uri_limit_seconds" placeholder="针对URI限流统计周期（秒）">
+       <input type="number" class="form-control" name="uri_limit_seconds" value="0" placeholder="针对URI限流统计周期（秒）">
       </div>
       <div class="form-group">
        <label>针对URI限流统计周期内最大允许请求数</label>
-       <input type="number" class="form-control" name="uri_limit_times" placeholder="针对URI限流统计周期内最大允许请求数">
+       <input type="number" class="form-control" name="uri_limit_times" value="0" placeholder="针对URI限流统计周期内最大允许请求数">
       </div>
       <div class="form-group">
        <label>针对URI单个IP限流统计周期（秒）</label>
-       <input type="number" class="form-control" name="ip_uri_limit_seconds" placeholder="针对URI限流统计周期（秒）">
+       <input type="number" class="form-control" name="ip_uri_limit_seconds" value="0" placeholder="针对URI限流统计周期（秒）">
       </div>
       <div class="form-group">
        <label>针对URI单个IP限流统计周期内最大允许请求数</label>
-       <input type="number" class="form-control" name="ip_uri_limit_times" placeholder="针对URI限流统计周期内最大允许请求数">
+       <input type="number" class="form-control" name="ip_uri_limit_times" value="0" placeholder="针对URI限流统计周期内最大允许请求数">
       </div>
       <div class="form-group">
-       <label >uri description</label>
+       <label >配置备注描述</label>
        <input type="text" class="form-control" name="description" placeholder="uri description">
       </div>
      </div>
@@ -56,8 +56,9 @@
           uri_limit_seconds:$("input[name='uri_limit_seconds']").val(),
           uri_limit_times:$("input[name='uri_limit_times']").val(),
           ip_uri_limit_seconds:$("input[name='ip_uri_limit_seconds']").val(),
-          original_uri:$("input[name='original_uri']").val(),
-          ip_uri_limit_times:$("input[name='ip_uri_limit_times']").val()};
+          ip_uri_limit_times:$("input[name='ip_uri_limit_times']").val(),
+          description:$("input[name='description']").val()
+      };
         api_invoke("/api/v1/api/edit", params, function(data){
             if(data.errno == 0){
                 load_page("/pages/api/list.html");
@@ -72,6 +73,10 @@
                 $("input[name='request_uri']").val(data.info.request_uri);
                 $("input[name='original_uri']").val(data.info.original_uri);
                 $("input[name='description']").val(data.info.description);
+                $("input[name='uri_limit_seconds']").val(data.info.uri_limit_seconds);
+                $("input[name='uri_limit_times']").val(data.info.uri_limit_times);
+                $("input[name='ip_uri_limit_seconds']").val(data.info.ip_uri_limit_seconds);
+                $("input[name='ip_uri_limit_times']").val(data.info.ip_uri_limit_times);
             }else{
                 alert(data.msg);
             }

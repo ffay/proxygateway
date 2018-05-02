@@ -16,6 +16,22 @@
        <input type="text" class="form-control" name="original_uri" placeholder="The backend service's uri">
       </div>
       <div class="form-group">
+       <label>针对URI限流统计周期（秒）</label>
+       <input type="number" class="form-control" name="uri_limit_seconds" placeholder="针对URI限流统计周期（秒）">
+      </div>
+      <div class="form-group">
+       <label>针对URI限流统计周期内最大允许请求数</label>
+       <input type="number" class="form-control" name="uri_limit_times" placeholder="针对URI限流统计周期内最大允许请求数">
+      </div>
+      <div class="form-group">
+       <label>针对URI单个IP限流统计周期（秒）</label>
+       <input type="number" class="form-control" name="ip_uri_limit_seconds" placeholder="针对URI限流统计周期（秒）">
+      </div>
+      <div class="form-group">
+       <label>针对URI单个IP限流统计周期内最大允许请求数</label>
+       <input type="number" class="form-control" name="ip_uri_limit_times" placeholder="针对URI限流统计周期内最大允许请求数">
+      </div>
+      <div class="form-group">
        <label >uri description</label>
        <input type="text" class="form-control" name="description" placeholder="uri description">
       </div>
@@ -33,7 +49,15 @@
 <script type="text/javascript">
       $(".content-header h1").html(domain_name+" > "+service_name+" > Edit service uri")
       $("#edit-api-btn").click(function(){
-      var params = {api_id:api_id,request_uri:$("input[name='request_uri']").val(),original_uri:$("input[name='original_uri']").val(),description:$("input[name='description']").val()};
+      var params = {
+          api_id:api_id,
+          request_uri:$("input[name='request_uri']").val(),
+          original_uri:$("input[name='original_uri']").val(),
+          uri_limit_seconds:$("input[name='uri_limit_seconds']").val(),
+          uri_limit_times:$("input[name='uri_limit_times']").val(),
+          ip_uri_limit_seconds:$("input[name='ip_uri_limit_seconds']").val(),
+          original_uri:$("input[name='original_uri']").val(),
+          ip_uri_limit_times:$("input[name='ip_uri_limit_times']").val()};
         api_invoke("/api/v1/api/edit", params, function(data){
             if(data.errno == 0){
                 load_page("/pages/api/list.html");

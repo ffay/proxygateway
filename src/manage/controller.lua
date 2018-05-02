@@ -145,8 +145,8 @@ function _M.run()
     end)
 
     app:route("/api/v1/api/edit", function(params)
-        check_require_params(params, { "api_id", "request_uri", "original_uri", "description" })
-        return api_model.update(params["api_id"], params["request_uri"], params["original_uri"], params["description"])
+        check_require_params(params, { "uri_limit_seconds", "uri_limit_times", "ip_uri_limit_seconds", "ip_uri_limit_times", "api_id", "request_uri", "original_uri", "description" })
+        return api_model.update(params["api_id"], params["request_uri"], params["original_uri"], params["uri_limit_seconds"], params["uri_limit_times"], params["ip_uri_limit_seconds"], params["ip_uri_limit_times"], params["description"])
     end)
 
     app:run()

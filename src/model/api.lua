@@ -31,10 +31,10 @@ function api_model.deleteByServiceId(sid)
     return res, err
 end
 
-function api_model.update(id, request_uri, original_uri, description)
+function api_model.update(id, request_uri, original_uri, uri_limit_seconds, uri_limit_times, ip_uri_limit_seconds, ip_uri_limit_times, description)
     local db = mysql.getDb()
     description = ndk.set_var.set_quote_sql_str(description)
-    local res, err, _, _ = db:query("UPDATE agw_api SET request_uri=\'" .. request_uri .. "\',original_uri=\'" .. original_uri .. "\',description=" .. description .. " WHERE id=" .. id, 10)
+    local res, err, _, _ = db:query("UPDATE agw_api SET ip_uri_limit_times=" .. ip_uri_limit_times .. ",ip_uri_limit_seconds=" .. ip_uri_limit_seconds .. ",uri_limit_times=" .. uri_limit_times .. ",uri_limit_seconds=" .. uri_limit_seconds .. ",request_uri=\'" .. request_uri .. "\',original_uri=\'" .. original_uri .. "\',description=" .. description .. " WHERE id=" .. id, 10)
     db:set_keepalive(10000, 10)
     return res, err
 end

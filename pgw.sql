@@ -3,6 +3,10 @@ CREATE TABLE `agw_api` (
   `service_id` int(11) DEFAULT NULL,
   `request_uri` varchar(64) DEFAULT NULL,
   `original_uri` varchar(64) DEFAULT NULL,
+  `uri_limit_seconds` int(10) NOT NULL DEFAULT '0',
+  `uri_limit_times` int(10) NOT NULL DEFAULT '0',
+  `ip_uri_limit_seconds` int(10) NOT NULL DEFAULT '0',
+  `ip_uri_limit_times` int(10) NOT NULL DEFAULT '0',
   `description` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `agw_api` (`id`, `service_id`, `request_uri`, `original_uri`, `description`) VALUES

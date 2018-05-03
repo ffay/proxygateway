@@ -14,10 +14,10 @@
      <div class="box-tools">
       <div class="input-group input-group-sm" style="width: 150px;">
        <div class="input-group-btn">
-        <button class="btn btn-block btn-primary" onclick="load_page('/pages/api/add.html')">Add uri</button>
+        <button class="btn btn-block btn-primary" onclick="load_page('/pages/api/add.html')">添加URI映射</button>
        </div>
         <div class="input-group-btn">
-          <button class="btn btn-default" onclick="load_page('/pages/service/list.html');">Back</button>
+          &nbsp;&nbsp;<button class="btn btn-default" onclick="load_page('/pages/service/list.html');">返回</button>
        </div>
       </div>
      </div>
@@ -35,10 +35,10 @@
   <%for(var i = 0; i < list.length; i++) {%>
   <% if(i==0){%>
   <tr>
-   <th>Request uri</th>
-   <th>Original uri</th>
-   <th>Description</th>
-   <th>Manage</th>
+   <th>原始请求URI</th>
+   <th>后端服务URI</th>
+   <th>配置备注描述</th>
+   <th>管理</th>
   </tr>
   <%}%>
   <tr>
@@ -46,15 +46,15 @@
    <td><%:=list[i].original_uri%></td>
    <td><%:=list[i].description%></td>
    <td>
-    <a href="javascript:;" onclick="api_id=<%:=list[i].id%>;load_page('/pages/api/edit.html')" >Edit</a>&nbsp;&nbsp;
-    <a href="javascript:;" data-id="<%:=list[i].id%>" class="api-delete">Delete</a></td>
+    <a href="javascript:;" onclick="api_id=<%:=list[i].id%>;load_page('/pages/api/edit.html')" >编辑</a>&nbsp;&nbsp;
+    <a href="javascript:;" data-id="<%:=list[i].id%>" class="api-delete">删除</a></td>
   </tr>
   <%}%>
  </table>
 </script>
 <script type="text/javascript">
-    $(".content-header h1").html(domain_name+" > "+service_name+" > uris");
-    $(".box-title").html("uris");
+    $(".content-header h1").html(domain_name+" > "+service_name+" > URI映射管理");
+    $(".box-title").html("URI映射配置列表");
     $(function(){
         api_invoke("/api/v1/api/list", {service_id:service_id}, function(data){
             if(data.errno == 0){

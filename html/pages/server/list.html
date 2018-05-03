@@ -14,10 +14,10 @@
      <div class="box-tools">
       <div class="input-group input-group-sm" style="width: 150px;">
        <div class="input-group-btn">
-        <button class="btn btn-block btn-primary" onclick="load_page('/pages/server/add.html')">Add server</button>
+        <button class="btn btn-block btn-primary" onclick="load_page('/pages/server/add.html')">添加后端服务器</button>
        </div>
         <div class="input-group-btn">
-          <button class="btn btn-default" onclick="load_page('/pages/service/list.html');">Back</button>
+         &nbsp;&nbsp; <button class="btn btn-default" onclick="load_page('/pages/service/list.html');">返回</button>
        </div>
       </div>
      </div>
@@ -35,13 +35,13 @@
   <%for(var i = 0; i < list.length; i++) {%>
   <% if(i==0){%>
   <tr>
-   <th>Ip</th>
-   <th>Port</th>
-   <th>Protocol</th>
-   <th>Weight</th>
-   <th>Status</th>
-   <th>Description</th>
-   <th>Manage</th>
+   <th>后端服务器IP</th>
+   <th>后端服务器端口</th>
+   <th>代理协议</th>
+   <th>权重</th>
+   <th>存活状态</th>
+   <th>备注描述</th>
+   <th>管理</th>
   </tr>
   <%}%>
   <tr>
@@ -58,15 +58,15 @@
    </td>
    <td><%:=list[i].description%></td>
    <td>
-    <a href="javascript:;" onclick="server_id=<%:=list[i].id%>;load_page('/pages/server/edit.html')" >Edit</a>&nbsp;&nbsp;
-    <a href="javascript:;" data-id="<%:=list[i].id%>" class="server-delete">Delete</a></td>
+    <a href="javascript:;" onclick="server_id=<%:=list[i].id%>;load_page('/pages/server/edit.html')" >编辑</a>&nbsp;&nbsp;
+    <a href="javascript:;" data-id="<%:=list[i].id%>" class="server-delete">删除</a></td>
   </tr>
   <%}%>
  </table>
 </script>
 <script type="text/javascript">
-    $(".content-header h1").html(domain_name+" > "+service_name+" > Backend servers");
-    $(".box-title").html("Backend servers");
+    $(".content-header h1").html(domain_name+" > "+service_name+" > 后端服务器管理");
+    $(".box-title").html("后端服务器列表");
     $(function(){
         api_invoke("/api/v1/server/list", {service_id:service_id}, function(data){
             if(data.errno == 0){

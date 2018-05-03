@@ -1,5 +1,5 @@
 <section class="content-header">
- <h1>Add api</h1>
+ <h1>添加URI映射</h1>
 </section>
 <section class="content">
  <!-- /.row -->
@@ -8,22 +8,22 @@
    <div class="box box-primary">
      <div class="box-body">
       <div class="form-group">
-       <label>Request uri</label>
-       <input type="text" class="form-control" name="request_uri" placeholder="Request uri">
+       <label>原始请求URI（例如 / 会匹配 / 开头的所有请求）</label>
+       <input type="text" class="form-control" name="request_uri" placeholder="原始请求URI">
       </div>
       <div class="form-group">
-       <label>Original uri</label>
-       <input type="text" class="form-control" name="original_uri" placeholder="The backend service's uri">
+       <label>后端服务URI</label>
+       <input type="text" class="form-control" name="original_uri" placeholder="后端服务URI">
       </div>
       <div class="form-group">
-       <label >uri description</label>
-       <input type="text" class="form-control" name="description" placeholder="uri description">
+       <label >配置备注描述</label>
+       <input type="text" class="form-control" name="description" placeholder="配置备注描述">
       </div>
      </div>
      <!-- /.box-body -->
      <div class="box-footer">
-      <button id="add-api-btn" class="btn btn-primary">Add</button>
-      <button class="btn btn-default" onclick="load_page('/pages/api/list.html');">Cancel</button>
+      <button id="add-api-btn" class="btn btn-primary">添加</button>
+      <button class="btn btn-default" onclick="load_page('/pages/api/list.html');">取消</button>
      </div>
    </div>
    <!-- /.box -->
@@ -31,7 +31,7 @@
  </div>
 </section>
 <script type="text/javascript">
-      $(".content-header h1").html(domain_name+" > "+service_name+" > Add service uri")
+      $(".content-header h1").html(domain_name+" > "+service_name+" > 添加URI映射")
       $("#add-api-btn").click(function(){
       var params = {service_id:service_id,request_uri:$("input[name='request_uri']").val(),original_uri:$("input[name='original_uri']").val(),description:$("input[name='description']").val()};
         api_invoke("/api/v1/api/add", params, function(data){

@@ -1,6 +1,6 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
- <h1>Domain list</h1>
+ <h1>域名列表</h1>
 </section>
 <!-- Main content -->
 <section class="content">
@@ -21,13 +21,13 @@
   <%for(var i = 0; i < list.length; i++) {%>
   <% if(i==0){%>
   <tr>
-   <th>Domain</th>
-   <th>Manage</th>
+   <th>域名</th>
+   <th>管理</th>
   </tr>
   <%}%>
   <tr>
    <td><%:=list[i].name%></td>
-   <td><a href="javascript:;" onclick="domain_name='<%:=list[i].name%>';domain_id='<%:=list[i].id%>';load_page('/pages/domain/edit.html');">Edit</a>&nbsp;&nbsp;<a href="javascript:;" data-id="<%:=list[i].id%>" class="domain-delete">Delete</a></td>
+   <td><a href="javascript:;" onclick="domain_name='<%:=list[i].name%>';domain_id='<%:=list[i].id%>';load_page('/pages/domain/edit.html');">编辑</a>&nbsp;&nbsp;<a href="javascript:;" data-id="<%:=list[i].id%>" class="domain-delete">删除</a></td>
   </tr>
   <%}%>
  </table>
@@ -40,7 +40,7 @@
                 $("#domain-list-container").html(html);
                     $(".domain-delete").click(function(){
                         var id=$(this).attr("data-id");
-                        if(confirm("Please make sure to delete this domain?")){
+                        if(confirm("确定删除该域名?删除后该域名所有相关配置都将被删除")){
                             delete_domain(id);
                         }
                     });

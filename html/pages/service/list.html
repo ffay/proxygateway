@@ -14,7 +14,7 @@
      <div class="box-tools">
       <div class="input-group input-group-sm" style="width: 150px;">
        <div class="input-group-btn">
-        <button class="btn btn-block btn-primary" onclick="load_page('/pages/service/add.html')">Add service</button>
+        <button class="btn btn-block btn-primary" onclick="load_page('/pages/service/add.html')">添加服务模块</button>
        </div>
       </div>
      </div>
@@ -31,17 +31,17 @@
 <table class="table table-hover">
   <% if(list.length==0){%>
       <tr>
-       <th>No services</th>
+       <th>还没有服务模块，请添加</th>
       </tr>
   <%}%>
   <%for(var i = 0; i < list.length; i++) {%>
   <% if(i==0){%>
   <tr>
-   <th>Service module</th>
-   <th>Host</th>
-   <th>Description</th>
-   <th>Server status</th>
-   <th>Manage</th>
+   <th>服务模块</th>
+   <th>后端主机域名</th>
+   <th>备注描述</th>
+   <th>后端服务器状态</th>
+   <th>管理</th>
   </tr>
   <%}%>
   <tr>
@@ -50,10 +50,10 @@
    <td><%:=list[i].description%></td>
    <td><%:=list[i].status%></td>
    <td>
-    <a href="javascript:;" onclick="service_id=<%:=list[i].id%>;service_name='<%:=list[i].name.replace(/\'/g,"\\\'")%>';load_page('/pages/server/list.html')">Servers</a>&nbsp;&nbsp;
-    <a href="javascript:;" onclick="service_id=<%:=list[i].id%>;service_name='<%:=list[i].name.replace(/\'/g,"\\\'")%>';load_page('/pages/api/list.html')">Uris</a>&nbsp;&nbsp;
-    <a href="javascript:;" onclick="service_id=<%:=list[i].id%>;load_page('/pages/service/edit.html')" >Edit</a>&nbsp;&nbsp;
-    <a href="javascript:;" data-id="<%:=list[i].id%>" class="service-delete">Delete</a></td>
+    <a href="javascript:;" onclick="service_id=<%:=list[i].id%>;service_name='<%:=list[i].name.replace(/\'/g,"\\\'")%>';load_page('/pages/server/list.html')">后端服务器</a>&nbsp;&nbsp;
+    <a href="javascript:;" onclick="service_id=<%:=list[i].id%>;service_name='<%:=list[i].name.replace(/\'/g,"\\\'")%>';load_page('/pages/api/list.html')">URI映射</a>&nbsp;&nbsp;
+    <a href="javascript:;" onclick="service_id=<%:=list[i].id%>;load_page('/pages/service/edit.html')" >编辑</a>&nbsp;&nbsp;
+    <a href="javascript:;" data-id="<%:=list[i].id%>" class="service-delete">删除</a></td>
   </tr>
   <%}%>
  </table>

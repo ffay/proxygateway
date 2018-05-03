@@ -1,5 +1,5 @@
 <section class="content-header">
- <h1>Add Server</h1>
+ <h1>编辑后端服务器</h1>
 </section>
 <section class="content">
  <!-- /.row -->
@@ -8,31 +8,31 @@
    <div class="box box-primary">
      <div class="box-body">
       <div class="form-group">
-       <label>Server ip</label>
-       <input type="text" class="form-control" name="ip" placeholder="Server ip">
+       <label>后端服务器IP</label>
+       <input type="text" class="form-control" name="ip" placeholder="后端服务器IP">
       </div>
       <div class="form-group">
-       <label>Server port</label>
-       <input type="text" class="form-control" name="port" placeholder="Server port">
+       <label>后端服务器端口</label>
+       <input type="text" class="form-control" name="port" placeholder="后端服务器端口">
       </div>
       <div class="form-group">
-       <label>Server protocol</label>
+       <label>代理协议</label>
        <select name="protocol" class="form-control">
        </select>
       </div>
       <div class="form-group">
-       <label>Server weight</label>
-       <input type="text" class="form-control" name="weight" placeholder="Server weight">
+       <label>权重</label>
+       <input type="text" class="form-control" name="weight" placeholder="权重">
       </div>
       <div class="form-group">
-       <label >Server description</label>
-       <input type="text" class="form-control" name="description" placeholder="Server description">
+       <label >服务器备注描述</label>
+       <input type="text" class="form-control" name="description" placeholder="备注描述">
       </div>
      </div>
      <!-- /.box-body -->
      <div class="box-footer">
-      <button id="add-server-btn" class="btn btn-primary">Edit</button>
-      <button class="btn btn-default" onclick="load_page('/pages/server/list.html');">Cancel</button>
+      <button id="add-server-btn" class="btn btn-primary">编辑</button>
+      <button class="btn btn-default" onclick="load_page('/pages/server/list.html');">取消</button>
      </div>
    </div>
    <!-- /.box -->
@@ -40,7 +40,7 @@
  </div>
 </section>
 <script type="text/javascript">
-      $(".content-header h1").html(domain_name+" > "+service_name+" > Edit backend server")
+      $(".content-header h1").html(domain_name+" > "+service_name+" > 编辑后端服务器")
       $("#add-server-btn").click(function(){
       if (!is_ip($("input[name='ip']").val())) {
         alert("Invalid ip address.");

@@ -52,7 +52,7 @@
    <td>
     <a href="javascript:;" onclick="service_id=<%:=list[i].id%>;service_name='<%:=list[i].name.replace(/\'/g,"\\\'")%>';load_page('/pages/server/list.html')">后端服务器</a>&nbsp;&nbsp;
     <a href="javascript:;" onclick="service_id=<%:=list[i].id%>;service_name='<%:=list[i].name.replace(/\'/g,"\\\'")%>';load_page('/pages/api/list.html')">URI映射</a>&nbsp;&nbsp;
-    <a href="javascript:;" onclick="service_id=<%:=list[i].id%>;load_page('/pages/service/edit.html')" >编辑与限流</a>&nbsp;&nbsp;
+    <a href="javascript:;" onclick="service_id=<%:=list[i].id%>;load_page('/pages/service/edit.html')" >编辑</a>&nbsp;&nbsp;
     <a href="javascript:;" data-id="<%:=list[i].id%>" class="service-delete">删除</a></td>
   </tr>
   <%}%>
